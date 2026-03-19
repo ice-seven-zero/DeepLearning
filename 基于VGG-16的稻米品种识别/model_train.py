@@ -83,8 +83,7 @@ def train_model_process(model, train_dataloader, val_dataloader, num_epochs):
         for data in train_dataloader:
             img, targets = data  # targets 只包含 0 和 1 两个值。
 
-            img = img.to(
-                device)  # 这是因为 ImageFolder 会根据子文件夹名称的字母顺序自动分配类别索引：'cat' < 'dog'，所以 cat 文件夹对应的标签是 0，dog 文件夹对应的标签是 1。在 DataLoader 迭代时，每个批次的 targets 张量里就是这些 0 或 1 的整数，形状为 (batch_size,)，例如 tensor([0,1,0,0,1,...])。
+            img = img.to(device)  # 这是因为 ImageFolder 会根据子文件夹名称的字母顺序自动分配类别索引
             targets = targets.to(device)
             model.train()
 
