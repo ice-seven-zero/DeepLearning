@@ -37,7 +37,7 @@ def get_pretrained_vgg16(num_classes=5):
 
     # 获取分类器最后一层的输入特征数（原为 4096）
     in_features = model.classifier[6].in_features
-    # 替换最后一层为二分类
+    # 替换最后一层为五分类
     model.classifier[6] = nn.Linear(in_features, num_classes)
     return model
 
