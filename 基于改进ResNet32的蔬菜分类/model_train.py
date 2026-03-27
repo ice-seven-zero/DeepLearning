@@ -9,7 +9,7 @@ import torch.nn as nn
 from model import ResNet32
 
 
-def load_data(data_dir='Vegetable Images', batch_size=64, img_size=224):
+def load_data(data_dir='Vegetable Images', batch_size=64, img_size=32):
     # 训练集数据增强
     train_transform = transforms.Compose([
         transforms.RandomResizedCrop(img_size),  # 随机裁剪并缩放

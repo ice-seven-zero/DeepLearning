@@ -182,7 +182,7 @@ class ResNet32(nn.Module):
                                    use_1conv=False,
                                    strides=1,
                                    use_cbam=use_cbam))
-        return nn.Sequential(*layers)
+        return nn.Sequential(*layers)# _ 可以明确告诉阅读代码的人：“这里我们只需要循环次数，不关心循环索引的值”
 
     def forward(self, x):
         x = self.conv1(x)  # 初始卷积：3→16，32×32
