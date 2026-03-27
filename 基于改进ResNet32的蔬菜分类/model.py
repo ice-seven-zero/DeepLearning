@@ -153,7 +153,7 @@ class ResNet32(nn.Module):
         self.layer3 = self._make_layer(32, 64, blocks=5, stride=2, use_cbam=True)
 
         # 全局平均池化和分类头
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))#自适应平均池化，只需要指定输出尺寸，由 PyTorch 自动计算池化方式，输出尺寸固定。
         self.fc = nn.Linear(64, num_classes)
 
     # 在 Python 类中，方法的定义顺序不影响它们在实例化时的可用性。类定义会先完整地解析所有方法（包括 _make_layer），然后才执行 __init__ 方法。
@@ -193,7 +193,7 @@ class ResNet32(nn.Module):
         x = self.layer2(x)  # 阶段2：16→32，16×16
         x = self.layer3(x)  # 阶段3：32→64，8×8
 
-        x = self.avgpool(x)  # 全局平均池化：64×8×8 → 64×1×1
+        x = self.avgpool(x)  # 全局平均池化
         x = torch.flatten(x, 1)
         x = self.fc(x)  # 全连接分类：64 → num_classes
         return x

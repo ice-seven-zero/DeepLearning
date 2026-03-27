@@ -9,7 +9,8 @@ import torch.nn as nn
 from model import ResNet32
 
 
-def load_data(data_dir='Vegetable Images', batch_size=64, img_size=32):
+def load_data(data_dir='Vegetable Images', batch_size=64, img_size=224):#应该是32，
+    # 但是加了self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
     # 训练集数据增强
     train_transform = transforms.Compose([
         transforms.RandomResizedCrop(img_size),  # 随机裁剪并缩放
