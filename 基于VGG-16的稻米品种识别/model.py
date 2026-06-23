@@ -63,7 +63,7 @@ class VGG16(nn.Module):
             if isinstance(m, nn.Conv2d):  # 如果当前模块 m 是卷积层（nn.Conv2d），则对其权重使用Kaiming正态分布初始化（也称为 He 初始化）。因为只有卷积层是带参数的
                 nn.init.kaiming_normal_(m.weight,
                                         nonlinearity='relu')  # 参数 nonlinearity='relu' 表示该层之后使用的激活函数是 ReLU，初始化时会考虑 ReLU 的负半轴为 0 的特性
-                if m.bias is not None:  # 如果该卷积层使用了偏置（bias 不为 None），则将偏置初始化为常数 0。这是常见做法，因为偏置通常不需要复杂的初始化。
+                if m.bias is not None:  # 如果该卷积层使用了偏置（bias 不为 None），则将偏置初始化为常数 0。因为偏置通常不需要复杂的初始化。
                     nn.init.constant_(m.bias, 0)
             elif isinstance(m, nn.Linear):  # 如果当前模块 m 是线性层（全连接层 nn.Linear），则对其权重使用正态分布初始化，均值为 0，标准差为 0.01
                 nn.init.normal_(m.weight, 0, 0.01)

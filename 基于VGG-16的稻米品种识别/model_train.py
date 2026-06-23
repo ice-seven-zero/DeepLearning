@@ -45,7 +45,7 @@ def get_pretrained_vgg16(num_classes=5):
 def train_model_process(model, train_dataloader, val_dataloader, num_epochs):
     # 设定训练所用到的设备，有GPU用GPU没有GPU用CPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # 使用Adam优化器，学习率为0.001
+    # 使用Adam优化器，学习率为0.001，更新权重
     optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
     # 损失函数为交叉熵函数
     criterion = nn.CrossEntropyLoss()
@@ -93,7 +93,7 @@ def train_model_process(model, train_dataloader, val_dataloader, num_epochs):
             # 计算每一个batch的损失函数
             loss = criterion(output, targets)
 
-            # 利用梯度更新权重
+            # 利用梯度更新权重，优化器清零
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
