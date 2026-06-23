@@ -13,7 +13,7 @@ def train_val_data_process(data_dir='Rice_Image_Dataset', batch_size=64):
     # 定义数据预处理：VGG16 要求输入 224x224，并使用 ImageNet 的均值和标准差
     transform = transforms.Compose([
         transforms.Resize((224, 224)),  # 统一缩放到 224x224
-        transforms.ToTensor(),
+        transforms.ToTensor(),  # 为转化为tensor格式，便于torch使用
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # ImageNet均值和标准差
     ])
 
@@ -89,7 +89,7 @@ def train_model_process(model, train_dataloader, val_dataloader, num_epochs):
 
             output = model(img)
             # 查找每一行中最大值对应的行标
-            pre_lab = torch.argmax(output, dim=1)#dim 参数指定了沿着哪个维度计算最大值
+            pre_lab = torch.argmax(output, dim=1)  # dim 参数指定了沿着哪个维度计算最大值
             # 计算每一个batch的损失函数
             loss = criterion(output, targets)
 
